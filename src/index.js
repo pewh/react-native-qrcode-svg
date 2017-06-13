@@ -1,8 +1,8 @@
 // core
 import React, { PropTypes, PureComponent } from 'react'
-import { View, Image } from 'react-native'
+import { View, Image as ReactImage } from 'react-native'
 // libs
-import Svg, { Rect, Path } from 'react-native-svg'
+import Svg, { Rect, Path, Image } from 'react-native-svg'
 import genMatrix from './genMatrix'
 
 /**
@@ -19,7 +19,7 @@ export default class QRCode extends PureComponent {
     /* the color of the background */
     backgroundColor: PropTypes.string,
     /* an image source object. example {uri: 'base64string'} or {require('pathToImage')} */
-    logo: Image.propTypes.source,
+    logo: ReactImage.propTypes.source,
     /* logo width in pixels */
     logoSize: PropTypes.number,
     /* the logo gets a filled rectangular background with this color. Use 'transparent'
@@ -99,32 +99,38 @@ export default class QRCode extends PureComponent {
       logoMargin
     } = this.props
     const wrapSize = logoSize + logoMargin * 2
-    const position = size / 2 - logoSize / 2 - logoMargin
+    // const position = ((size/2)-(logoSize/2) - logoMargin)/size*100;
+    // const position = ((size/2) - (logoSize/2) - logoMargin);
+    const sizz=100;
+    // const sizz=(logoSize/size*100);
 
-    return (
-      <View
-        style={{
-          backgroundColor: logoBackgroundColor,
-          width: wrapSize,
-          height: wrapSize,
-          position: 'absolute',
-          left: position,
-          top: position
-        }}
-      >
+    const cell = this._cellSize * 8;
+    const cell2 = this._cellSize * 6;
+    const position = ((size) / 2) - (cell/2);
+    const position2 = ((size) / 2) - (cell2/2);
+    const wat = 10;
+    console.log("logo", position,wat, cell )
+
+    return [
+        <Rect
+            x={position}
+            y={position}
+            width={cell}
+            height={cell}
+            fill={backgroundColor}
+        >
+
+        </Rect>,
         <Image
-          style={{
-            width: logoSize,
-            height: logoSize,
-            position: 'absolute',
-            left: logoMargin,
-            top: logoMargin
-          }}
-          source={logo}
-          resizeMode='contain'
+            x={position2}
+            y={position2}
+            preserveAspectRatio="xMinYMid meet"
+
+            width={"100%"}
+            height={cell2}
+            href={logo}
         />
-      </View>
-    )
+    ]
   }
 
   render () {
@@ -134,10 +140,8 @@ export default class QRCode extends PureComponent {
       <View>
         <Svg ref={getRef} width={size} height={size}>
           <Rect
-            x={this._cellSize}
-            y={this._cellSize}
-            width={size - 2 * this._cellSize}
-            height={size - 2 * this._cellSize}
+            width={size}
+            height={size}
             fill={backgroundColor}
           />
           <Path
@@ -145,8 +149,9 @@ export default class QRCode extends PureComponent {
             stroke={color}
             strokeWidth={this._cellSize}
           />
+
+          {logo && this.renderLogo()}
         </Svg>
-        {logo && this.renderLogo()}
       </View>
     )
   }
