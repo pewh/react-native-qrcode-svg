@@ -113,15 +113,17 @@ export default class QRCode extends PureComponent {
 
     return [
         <Rect
+            key="logoBackground"
             x={position}
             y={position}
             width={cell}
             height={cell}
-            fill={backgroundColor}
+            fill={logoBackgroundColor}
         >
 
         </Rect>,
         <Image
+            key="logo"
             x={position2}
             y={position2}
             preserveAspectRatio="xMinYMid meet"
