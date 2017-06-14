@@ -36,8 +36,8 @@
   },
   "homepage": "https://github.com/awesomejerry/react-native-qrcode-svg#readme",
   "peerDependencies": {
-    "react": "^15.4.2",
-    "react-native": "^0.42.0",
+    "react": "^16.0.0-alpha.6",
+    "react-native": "^0.44.2",
     "react-native-svg": "^5.1.8"
   },
   "dependencies": {
