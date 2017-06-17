@@ -35,11 +35,6 @@
     "url": "https://github.com/awesomejerry/react-native-qrcode-svg/issues"
   },
   "homepage": "https://github.com/awesomejerry/react-native-qrcode-svg#readme",
-  "peerDependencies": {
-    "react": "^16.0.0-alpha.6",
-    "react-native": "^0.44.2",
-    "react-native-svg": "^5.1.8"
-  },
   "dependencies": {
     "qrcode": "^0.8.1"
   },
@@ -51,7 +46,7 @@
     "lint-staged": "^3.4.0",
     "pre-commit": "^1.2.2",
     "publish": "^0.6.0",
-    "react": "^15.4.2",
+    "react": "^16.0.0-alpha.12",
     "react-test-renderer": "^15.4.2",
     "standard": "^10.0.2"
   }
