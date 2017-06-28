@@ -95,41 +95,35 @@ export default class QRCode extends PureComponent {
       backgroundColor,
       logo,
       logoBackgroundColor = backgroundColor,
-      logoSize = size * 0.2,
+      logoBackgroundSize = 9,
+      logoSize = 6,
       logoMargin
     } = this.props
-    const wrapSize = logoSize + logoMargin * 2
-    // const position = ((size/2)-(logoSize/2) - logoMargin)/size*100;
-    // const position = ((size/2) - (logoSize/2) - logoMargin);
-    const sizz=100;
-    // const sizz=(logoSize/size*100);
 
-    const cell = this._cellSize * 8;
-    const cell2 = this._cellSize * 6;
-    const position = ((size) / 2) - (cell/2);
-    const position2 = ((size) / 2) - (cell2/2);
-    const wat = 10;
-    console.log("logo", position,wat, cell )
+    const backgroundCellSize = this._cellSize * logoBackgroundSize;
+    const logoCellSize = this._cellSize * logoSize;
+    const backgroundPosition = ((size) / 2) - (backgroundCellSize/2);
+    const logoPosition = ((size) / 2) - (logoCellSize/2);
 
     return [
         <Rect
             key="logoBackground"
-            x={position}
-            y={position}
-            width={cell}
-            height={cell}
+            x={backgroundPosition}
+            y={backgroundPosition}
+            width={backgroundCellSize}
+            height={backgroundCellSize}
             fill={logoBackgroundColor}
         >
 
         </Rect>,
         <Image
             key="logo"
-            x={position2}
-            y={position2}
+            x={logoPosition}
+            y={logoPosition}
             preserveAspectRatio="xMinYMid meet"
 
             width={"100%"}
-            height={cell2}
+            height={logoCellSize}
             href={logo}
         />
     ]
